@@ -139,5 +139,5 @@ main()
     })
     .finally(async () => {
         // Disconnect Prisma Client
-        await prisma.$disconnect()
+        await prisma.disconnect()
     })
