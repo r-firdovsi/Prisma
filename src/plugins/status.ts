@@ -1,18 +1,19 @@
-import Hapi from "@hapi/hapi"
-import boom from "@hapi/boom"
+import Hapi from '@hapi/hapi'
 
-const statusPlugin: Hapi.Plugin<undefined> = {
-    name: "app/status",
-    register: async function(server: Hapi.Server) {
-        // Define a status endpoint
-        server.route({
-            method: 'GET',
-            path: '/',
-            handler: async (request: Hapi.Request, h: Hapi.ResponseToolkit) => {
-                return boom.badImplementation()
-            }
-        })
-    }
+const plugin: Hapi.Plugin<undefined> = {
+  name: 'app/status',
+  register: async function (server: Hapi.Server) {
+    server.route({
+      // default status endpoint
+      method: 'GET',
+      path: '/',
+      handler: (_, h: Hapi.ResponseToolkit) =>
+        h.response({ up: true }).code(200),
+      options: {
+        auth: false,
+      },
+    })
+  },
 }
 
-export default statusPlugin
+export default plugin
